@@ -10,6 +10,11 @@ public class FileProcessor
 	private String inputFile;
 	private BufferedReader reader;	
 
+	public FileProcessor() {
+		inputFile = "input.txt";
+		reader = null;
+	}
+
 	public FileProcessor(String inFile) {
 		inputFile = inFile;
 	}

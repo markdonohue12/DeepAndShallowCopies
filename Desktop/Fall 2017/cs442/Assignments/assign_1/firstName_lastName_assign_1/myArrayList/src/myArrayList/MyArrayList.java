@@ -6,8 +6,16 @@ import java.util.Arrays;
 public class MyArrayList
 {
 	private int dataArr[];	
+	private int fileReadZeros;
+	
+	public MyArrayList() {
+		dataArr = new int[50];
+		fileReadZeros = 0;
+	}
 
 	public MyArrayList(String inFile) {
+		// set fileReadZeros to 0 because no numbers have been read from file yet
+		int fileReadZeros = 0;
 		// Create the FileProcessor obj so I can start reading from the file
 		FileProcessor processFile = new FileProcessor(inFile);
 		boolean openedSuccessfully = false;
@@ -30,10 +38,12 @@ public class MyArrayList
 					convertedInt = Integer.parseInt(line);
 					numsInserted += 1;
 					if(numsInserted > dataArr.length) {
-						
 						increaseSize(dataArr);
 					}
 					dataArr[index] = convertedInt;
+					if(convertedInt == 0) {
+						fileReadZeros += 1;
+					}
 					index += 1;
 				} catch (NumberFormatException e) {
 					System.err.println("File contained a non-integer line, skipped line and continued");
@@ -41,8 +51,22 @@ public class MyArrayList
 				line = processFile.readFileLine();
 			}
 		}
+		printArray("before sorting", dataArr);
 		// sort the array
 		Arrays.sort(dataArr);
+		printArray("AFTER sorting", dataArr);
+		//change placeholder 0's to -1's and keep fileReadZeros bc those are genuine 0 entries
+		int nonZeroIndex = 0;
+		for(int i = 0; i < dataArr.length; i++) {
+			if(dataArr[i] != 0) {
+				nonZeroIndex = i;
+				break;
+			}
+		}
+		for(int i = nonZeroIndex - fileReadZeros - 1; i >= 0; i--) {
+			dataArr[i] = -1;
+		}
+		printArray("AFTER PLACEHOLDER -1's ", dataArr);
 	}
 
 	public void increaseSize(int[] dataArray) {
@@ -95,10 +119,30 @@ public class MyArrayList
 		for(int i = 0; i < dataArr.length; i++) {
 			if(dataArr[i] == value) {
 				result = i;
-				break;
+				break; 
 			}
 		}
 		return result;
+	}
+
+	public int size() {
+		int arrCount = 0;
+		for(int i = 0; i < dataArr.length; i++) {
+			if(dataArr[i] != -1) {
+				arrCount += 1;
+			}
+		}
+		return arrCount;
+	}
+
+	public int sum() {
+		int sum = 0;
+		for(int i = 0; i < dataArr.length; i++) {
+			if(dataArr[i] != -1) {
+				sum += dataArr[i];
+			}
+		}
+		return sum;
 	}
 
 	public void printArray(String describer, int[] array) {
