@@ -8,7 +8,9 @@ public class Driver
 
 		// pass the input file name to the MyArrayList constructor
 		MyArrayList myList = new MyArrayList(args[0]);
+		myList.insertSorted(5673);
 		myList.removeValue(8);
+		System.out.println("the index of the first occurrence of 11 is " + myList.indexOf(13));
 		
 		
 

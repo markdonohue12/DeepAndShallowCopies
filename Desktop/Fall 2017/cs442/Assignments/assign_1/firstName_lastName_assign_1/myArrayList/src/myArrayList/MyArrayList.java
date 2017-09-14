@@ -53,6 +53,7 @@ public class MyArrayList
 	}
 
 	public void insertSorted(int newValue) {
+		printArray("BEFORE INSERTION", dataArr);
 		int insertAtIndex = -1;
 		for(int i = 0; i < dataArr.length; i++) {
 			if(newValue > dataArr[i]) {
@@ -69,21 +70,40 @@ public class MyArrayList
 				dataArr[i] = dataArr[i+1];
 			}
 		}
+		printArray("after insertion", dataArr);
 	}
 
 	public void shiftRightRemoveHelper(int index) {
-		for(int i = index; i < 0 - 1; i--) {
+		for(int i = index; i > 0; i--) {
 			dataArr[i] = dataArr[i-1];
 		}
 	}
 
 	public void removeValue(int value) {
+		printArray("before removeValue", dataArr);
 		for(int i = 0; i < dataArr.length; i++) {
 			if(dataArr[i] == value) {
 				shiftRightRemoveHelper(i);
-				i -= 1;
 			}
 		}
+		printArray("AFTER removeValue", dataArr);
 		Arrays.sort(dataArr);
+	}
+
+	public int indexOf(int value) {
+		int result = -1;
+		for(int i = 0; i < dataArr.length; i++) {
+			if(dataArr[i] == value) {
+				result = i;
+				break;
+			}
+		}
+		return result;
+	}
+
+	public void printArray(String describer, int[] array) {
+		for(int i = 0; i < array.length; i++) {
+			System.out.println(describer+" value at index "+i+" is " + array[i]);
+		}
 	}
 }
