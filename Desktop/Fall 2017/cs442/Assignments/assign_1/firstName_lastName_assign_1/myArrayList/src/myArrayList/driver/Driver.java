@@ -8,6 +8,8 @@ public class Driver
 
 		// pass the input file name to the MyArrayList constructor
 		MyArrayList myList = new MyArrayList(args[0]);
+		myList.removeValue(8);
+		
 		
 
 

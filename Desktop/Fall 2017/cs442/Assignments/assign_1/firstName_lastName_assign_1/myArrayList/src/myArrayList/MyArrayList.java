@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class MyArrayList
 {
-
 	private int dataArr[];	
 
 	public MyArrayList(String inFile) {
@@ -21,7 +20,6 @@ public class MyArrayList
 
 		// now if openedSuccessfully, start reading lines, each time storing the return value in the array
 		if(openedSuccessfully) {
-			// while still lines left to read in input file
 			dataArr = new int[50];
 			int convertedInt = -1;
 			int index = 0;
@@ -36,16 +34,15 @@ public class MyArrayList
 						increaseSize(dataArr);
 					}
 					dataArr[index] = convertedInt;
+					index += 1;
 				} catch (NumberFormatException e) {
 					System.err.println("File contained a non-integer line, skipped line and continued");
 				}
-				index += 1;
 				line = processFile.readFileLine();
 			}
 		}
-		for(int i = 0; i < dataArr.length; i++) {
-			System.out.println("FINAL value at index " +i+" is " +dataArr[i]);
-		}
+		// sort the array
+		Arrays.sort(dataArr);
 	}
 
 	public void increaseSize(int[] dataArray) {
@@ -54,5 +51,39 @@ public class MyArrayList
 		int newDataArr[] = Arrays.copyOf(dataArray, newLength);
 		dataArr = newDataArr;
 	}
-	
+
+	public void insertSorted(int newValue) {
+		int insertAtIndex = -1;
+		for(int i = 0; i < dataArr.length; i++) {
+			if(newValue > dataArr[i]) {
+				insertAtIndex = i;
+			} else {
+				break;
+			}
+		}
+		for(int i = 0; i <= insertAtIndex; i++) {
+			if(i == insertAtIndex) {
+				dataArr[i] = newValue;
+			}
+			else {
+				dataArr[i] = dataArr[i+1];
+			}
+		}
+	}
+
+	public void shiftRightRemoveHelper(int index) {
+		for(int i = index; i < 0 - 1; i--) {
+			dataArr[i] = dataArr[i-1];
+		}
+	}
+
+	public void removeValue(int value) {
+		for(int i = 0; i < dataArr.length; i++) {
+			if(dataArr[i] == value) {
+				shiftRightRemoveHelper(i);
+				i -= 1;
+			}
+		}
+		Arrays.sort(dataArr);
+	}
 }
