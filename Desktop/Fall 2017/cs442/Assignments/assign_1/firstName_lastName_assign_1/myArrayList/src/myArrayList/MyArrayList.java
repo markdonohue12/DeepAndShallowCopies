@@ -47,14 +47,13 @@ public class MyArrayList
 					index += 1;
 				} catch (NumberFormatException e) {
 					System.err.println("File contained a non-integer line, skipped line and continued");
+					System.out.println();
 				}
 				line = processFile.readFileLine();
 			}
 		}
-		printArray("before sorting", dataArr);
 		// sort the array
 		Arrays.sort(dataArr);
-		printArray("AFTER sorting", dataArr);
 		//change placeholder 0's to -1's and keep fileReadZeros bc those are genuine 0 entries
 		int nonZeroIndex = 0;
 		for(int i = 0; i < dataArr.length; i++) {
@@ -66,7 +65,6 @@ public class MyArrayList
 		for(int i = nonZeroIndex - fileReadZeros - 1; i >= 0; i--) {
 			dataArr[i] = -1;
 		}
-		printArray("AFTER PLACEHOLDER -1's ", dataArr);
 	}
 
 	public void increaseSize(int[] dataArray) {
@@ -77,7 +75,7 @@ public class MyArrayList
 	}
 
 	public void insertSorted(int newValue) {
-		printArray("BEFORE INSERTION", dataArr);
+		printArray("testIntInsertSorted test", dataArr);
 		int insertAtIndex = -1;
 		for(int i = 0; i < dataArr.length; i++) {
 			if(newValue > dataArr[i]) {
@@ -94,7 +92,7 @@ public class MyArrayList
 				dataArr[i] = dataArr[i+1];
 			}
 		}
-		printArray("after insertion", dataArr);
+		printArray("testIntInsertSorted result", dataArr);
 	}
 
 	public void shiftRightRemoveHelper(int index) {
@@ -110,7 +108,6 @@ public class MyArrayList
 				shiftRightRemoveHelper(i);
 			}
 		}
-		printArray("AFTER removeValue", dataArr);
 		Arrays.sort(dataArr);
 	}
 
