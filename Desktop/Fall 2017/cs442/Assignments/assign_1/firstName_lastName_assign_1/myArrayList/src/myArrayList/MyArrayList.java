@@ -146,7 +146,17 @@ public class MyArrayList
 	}
 
 	public void toString(int[] array) {
-		System.out.println("nothing to see here");
+		System.out.println("Here are the contents of the array: ");
+		for(int i = 0; i < array.length; i++) {
+			if(array[i] != -1) {
+				if(i == array.length - 1) {
+					System.out.print(array[i]);
+				} else {
+					System.out.println(array[i]+", ");
+				}
+			}
+		}
+		System.out.println();
 	}
 
 	public int[] getMyListArray() {

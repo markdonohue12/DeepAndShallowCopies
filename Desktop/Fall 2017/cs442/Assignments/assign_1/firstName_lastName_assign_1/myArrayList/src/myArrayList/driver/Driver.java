@@ -15,7 +15,8 @@ public class Driver
 		System.out.println("total num of elements in list is " + myList.size());
 		System.out.println("sum of the elements in the list is " + myList.sum());
 		myList.toString(myList.getMyListArray());
-		
+		MyArrayListTest testing = new MyArrayListTest();
+		testing.testMe(myList);
 		
 
 
