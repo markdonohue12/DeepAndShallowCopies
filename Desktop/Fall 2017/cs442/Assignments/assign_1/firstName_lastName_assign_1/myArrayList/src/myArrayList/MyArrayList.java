@@ -145,6 +145,14 @@ public class MyArrayList
 		return sum;
 	}
 
+	public void toString(int[] array) {
+		System.out.println("nothing to see here");
+	}
+
+	public int[] getMyListArray() {
+		return dataArr;
+	}
+
 	public void printArray(String describer, int[] array) {
 		for(int i = 0; i < array.length; i++) {
 			System.out.println(describer+" value at index "+i+" is " + array[i]);

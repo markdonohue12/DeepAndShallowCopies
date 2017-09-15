@@ -14,6 +14,7 @@ public class Driver
 		System.out.println("the index of the first occurrence of 13 is " + myList.indexOf(13));
 		System.out.println("total num of elements in list is " + myList.size());
 		System.out.println("sum of the elements in the list is " + myList.sum());
+		myList.toString(myList.getMyListArray());
 		
 		
 
