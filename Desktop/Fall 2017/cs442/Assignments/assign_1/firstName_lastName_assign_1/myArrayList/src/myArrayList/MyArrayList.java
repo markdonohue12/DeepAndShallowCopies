@@ -75,7 +75,6 @@ public class MyArrayList
 	}
 
 	public void insertSorted(int newValue) {
-		printArray("testIntInsertSorted test", dataArr);
 		int insertAtIndex = -1;
 		for(int i = 0; i < dataArr.length; i++) {
 			if(newValue > dataArr[i]) {
@@ -92,7 +91,6 @@ public class MyArrayList
 				dataArr[i] = dataArr[i+1];
 			}
 		}
-		printArray("testIntInsertSorted result", dataArr);
 	}
 
 	public void shiftRightRemoveHelper(int index) {
@@ -102,7 +100,6 @@ public class MyArrayList
 	}
 
 	public void removeValue(int value) {
-		printArray("before removeValue", dataArr);
 		for(int i = 0; i < dataArr.length; i++) {
 			if(dataArr[i] == value) {
 				shiftRightRemoveHelper(i);

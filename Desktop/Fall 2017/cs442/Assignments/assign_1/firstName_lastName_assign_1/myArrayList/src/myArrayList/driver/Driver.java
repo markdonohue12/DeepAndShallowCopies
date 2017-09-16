@@ -5,7 +5,6 @@ public class Driver
 
 	public static void main(String[] args) 
 	{
-
 		// pass the input file name to the MyArrayList constructor
 		MyArrayList myList = new MyArrayList(args[0]);
 		Results results = new Results();
@@ -16,6 +15,11 @@ public class Driver
 		for(int i = 0; i < results.getTestResults().length; i++) {
 			results.writeToStdOut("Test Result "+i+": " + results.getTestResults()[i]);
 		}
+		results.printSum(myList);
+		results.writeToFile(args[1], myList);
+		results.closeFile(args[1]);
+		
+		
 
 	/*
 		myList.insertSorted(20);

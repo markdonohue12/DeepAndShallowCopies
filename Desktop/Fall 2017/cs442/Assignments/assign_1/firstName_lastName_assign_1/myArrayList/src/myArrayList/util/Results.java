@@ -1,17 +1,14 @@
 package myArrayList.driver;
 
+import java.util.Formatter;
+
 public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 
 	private String[] testResults;
-/*
-	private Results[] resultsArr;
-	private boolean testPassed;
-	private String testMessage;
-	private String testName;
-*/	
+	private Formatter outF;
 
 	public Results() {
-		testResults = new String[11];
+		testResults = new String[10];
 	}
 
 	public void storeNewResults(String message, int index) {
@@ -19,12 +16,32 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 		testResults[index] = message;
 	}
 
+	public void printSum(MyArrayList myList) {
+		System.out.println("The sum of all the values in the list is: " + myList.sum());
+	}
+
 	public void writeToStdOut(String s) {
 		System.out.println(s);
 	}
 
-	public void writeToFile(String s) {
-		System.out.println("Inside Results, my writeToFile(String s) implementation goes here");
+	public void writeToFile(String outFile, MyArrayList myList) {
+		try {
+			outF = new Formatter(outFile);
+			for(int i = 0; i < getTestResults().length; i++) {
+				outF.format("%s\n", getTestResults()[i]);
+			}
+			outF.format("%s", "The sum of all the values in the list is: " + myList.sum());
+		} catch (Exception e) {
+			System.err.println("Error opening write file: " + e.getMessage());
+		}
+	}
+
+	public void closeFile(String outFile) {
+		try {
+			outF.close();
+		} catch (Exception e) {
+			System.err.println("Error closing write file: " + e.getMessage());
+		}
 	}
 
 	public String[] getTestResults() {
