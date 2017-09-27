@@ -8,8 +8,8 @@ public class Driver {
 		} else {
 			// create a TreeBuilder object, then start reading from file by 
 			// calling readFileForNodes on tree - sending in the input file name
-			TreeBuilder tree = new TreeBuilder();
-			tree.readFileForNodes(args[0]);
+			TreeBuilder originalTree = new TreeBuilder();
+			originalTree.readFileForNodes(args[0]);
 		}
 	}
 }
