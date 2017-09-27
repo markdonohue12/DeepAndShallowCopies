@@ -6,8 +6,10 @@ public class Driver {
 			System.err.println("Need exactly 5 arguments, program exiting");
 			System.exit(0);
 		} else {
-			// pass input file name to SOMEWHERE TO START READING INPUT
-			Node makeNode = new Node(args[0]);
+			// create a TreeBuilder object, then start reading from file by 
+			// calling readFileForNodes on tree - sending in the input file name
+			TreeBuilder tree = new TreeBuilder();
+			tree.readFileForNodes(args[0]);
 		}
 	}
 }
