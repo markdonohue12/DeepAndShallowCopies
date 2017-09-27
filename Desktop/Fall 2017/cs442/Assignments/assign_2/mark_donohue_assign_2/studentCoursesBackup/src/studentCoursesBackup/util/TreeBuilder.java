@@ -3,6 +3,7 @@ package studentCoursesBackup.driver;
 import java.io.FileNotFoundException;
 
 public class TreeBuilder {
+
 	public TreeBuilder() {
 		System.out.println("Building Trees or smoking 'em");
 	}
@@ -30,7 +31,17 @@ public class TreeBuilder {
 			while(line != null) {
 				System.out.println("the bNumber is " + line);
 				line = processFile.readFileLine();
+				// parse the input
+				String[] parcedInput = parseInput(line);
+				System.out.println("parcedInput is " + parcedInput[0] + " and  " + parcedInput[1]);
 			}
 		}
+	}
+	
+	// USED THIS SITE: http://pages.cs.wisc.edu/~hasti/cs302/examples/Parsing/parseString.html
+	private String[] parseInput(String line) {
+		String flag = "[:]+";
+		String[] parcedInput = line.split(flag);
+		return parcedInput;
 	}
 }
