@@ -4,8 +4,17 @@ import java.io.FileNotFoundException;
 
 public class TreeBuilder {
 
+	private Node left, right;
+	int keyBNumber;
+	String valueCourse;
+
 	public TreeBuilder() {
-		System.out.println("Building Trees or smoking 'em");
+		keyBNumber = 0;
+		valueCourse = " ";
+	}
+
+	public void insert(Node node) {
+		
 	}
 
 	public void readFileForNodes(String inFile) {
@@ -29,11 +38,20 @@ public class TreeBuilder {
 			// 		insert clone 2
 			String line = processFile.readFileLine();
 			while(line != null) {
-				System.out.println("the bNumber is " + line);
-				line = processFile.readFileLine();
 				// parse the input
 				String[] parcedInput = parseInput(line);
-				System.out.println("parcedInput is " + parcedInput[0] + " and  " + parcedInput[1]);
+
+				// convert bNumber from String to int
+				int bNum = Integer.parseInt(parcedInput[0]);
+				String course = parcedInput[1];
+
+				// now that we have the BNumber and the course, create a Node 
+				Node node = new Node(bNum, course);
+				
+				// now that I have Node object, I want to insert that node into the tree
+				insert(node);			
+
+				line = processFile.readFileLine();
 			}
 		}
 	}
