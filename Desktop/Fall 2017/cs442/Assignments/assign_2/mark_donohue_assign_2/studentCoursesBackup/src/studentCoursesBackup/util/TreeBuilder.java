@@ -55,7 +55,24 @@ public class TreeBuilder {
 		return clonedNode2;
 	}
 
+	  // url http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+
+      public Node search(Node root, int key) {
+			// Base Cases: root is null or key is present at root
+    		if (root==null || root.getBNumber() == key)
+       			return root;
+ 
+    		// val is greater than root's key
+   		 	if (root.getBNumber() > key)
+        		return search(root.getLeft(), key);
+ 
+    		// val is less than root's key
+    		return search(root.getRight(), key);
+      }
+
+
 	// used this URL: http://www.sanfoundry.com/java-program-implement-binary-search-tree/
+
 	public void readFileForNodes(String inFile) {
 		// create FileProcessor object to begin reading from file
 		FileProcessor processFile = new FileProcessor(inFile);
@@ -89,35 +106,29 @@ public class TreeBuilder {
 				// ———————————————————————————————
 
 				// before we make a new node we need to search through the tree
-				// if we find a BNum match, just add: node.studentCourses.add(course)
+				// if we find a Bnum match, just add: node.studentCourses.add(course)
 				// if we do not find that Bnum, we know we need to make a new node
 
-				// —————————————————————————————————————
+				// search for bNum
+				Node foundNode = search(root, bNum);
+				if(foundNode == null) {
+					System.out.println("did not find node in tree, creating new node");
+					// if here we know that the node does not exist yet 
+					// and therefore needs to be created and inserted	
+					Node node_orig = new Node(bNum, course);
+					insert(bNum, course);
+					Node backup_Node_1 = clone1(node_orig, bNum, course, iteration);
+					Node backup_Node_2 = clone2(node_orig, bNum, course, iteration);
+					
+					// now need to insert the backup_Nodes into their respective trees
 
+				} else {
+					// if here we know that the Node already exists and so all 
+					// we have to do is add the course to the studentCourses list
+					foundNode.getCourses().add(course);
+				}
 
-
-				// now that we have the BNumber and the course, create a Node 
-				Node node_orig = new Node(bNum, course);
-				
-				// now that I have Node object, I want to insert that node into the tree
-				insert(bNum, course);
-				System.out.println("Node_orig's BNumber is " + node_orig.getBNumber());
-
-				// make the first clone
-				// if this is the first iteration of the loop, then we need to 
-				// create a new TreeBuilder object, because we are starting a 
-				// new backup tree with a new root and everything
-				// so I want to 
-				// call the clone1() function, passing in the bNumber, course, and the iteration	
-				Node backup_Node_1 = clone1(node_orig, bNum, course, iteration);
-				Node backup_Node_2 = clone2(node_orig, bNum, course, iteration);
-
-				System.out.println(" =================================== ");
-				System.out.println("backup_Node_1's bNumber is " + backup_Node_1.getBNumber());	
-				System.out.println("Cloned1's courses are ");
-				for(String cstring : backup_Node_1.getCourses()) {
-					System.out.println(cstring);
-				}					
+				// —————————————————————————————————————			
 
 				line = processFile.readFileLine();
 				iteration += 1;
@@ -130,5 +141,9 @@ public class TreeBuilder {
 		String flag = "[:]";
 		String[] parcedInput = line.split(flag);
 		return parcedInput;
+	}
+
+	public Node getRoot() {
+		return root;
 	}
 }
