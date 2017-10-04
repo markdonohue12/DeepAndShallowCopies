@@ -16,7 +16,15 @@ public class Node implements Cloneable {
 	}
 
 	public Object clone() throws CloneNotSupportedException {
-    	return super.clone();
+ 		Node newNode = new Node();
+		newNode.bNumber = bNumber;
+		newNode.left = left;
+		newNode.right = right;
+		for(String course : studentCourses) {
+   			 newNode.studentCourses.add(course);
+		}   	
+
+		return super.clone();
 	}
 	
 	public Node getLeft() {

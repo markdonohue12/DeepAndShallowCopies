@@ -24,7 +24,6 @@ public class TreeBuilder {
 				rightNode = insert(node.getRight(), bNumber, course);
 			}
 		}
-		System.out.println("successfully returned node");
 		return node;
 	}
 
@@ -32,29 +31,28 @@ public class TreeBuilder {
 		root = insert(root, bNumber, course);
 	}
 
-	public void clone1(Node node_orig, int bNumber, String course, int iteration) {
+	public Node clone1(Node node_orig, int bNumber, String course, int iteration) {
+		Node clonedNode1 = null;
 		if(iteration == 0) {
 			TreeBuilder clone1Tree = new TreeBuilder();
 		}
 		try {
-			Node clonedNode1 = (Node) node_orig.clone();
-			System.out.println("Successfully cloned node 1");
-			System.out.println("Cloned1's BNumber is " + clonedNode1.getBNumber());
-			System.out.println("Cloned1's courses are " + Arrays.toString(clonedNode1.getCourses().toArray()));
+			clonedNode1 = (Node) node_orig.clone();
 		} catch (CloneNotSupportedException e) {													System.err.println("Error cloning clonedNode1 " + e.getMessage());
-		}
+		} 
+		return clonedNode1;
 	}
 
-	public void clone2(Node node_orig, int bNumber, String course, int iteration) {
+	public Node clone2(Node node_orig, int bNumber, String course, int iteration) {
+		Node clonedNode2 = null;
 		if(iteration == 0) {
 			TreeBuilder clone2Tree = new TreeBuilder();
 		}
 		try {
-			Node clonedNode2 = (Node) node_orig.clone();
-			System.out.println("Successfully cloned node 2");
-			System.out.println("Cloned2's BNumber is " + clonedNode2.getBNumber());
+			clonedNode2 = (Node) node_orig.clone();
 		} catch (CloneNotSupportedException e) {													System.err.println("Error cloning clonedNode2 " + e.getMessage());
-		}
+		} 
+		return clonedNode2;
 	}
 
 	// used this URL: http://www.sanfoundry.com/java-program-implement-binary-search-tree/
@@ -87,6 +85,17 @@ public class TreeBuilder {
 				int bNum = Integer.parseInt(parcedInput[0]);
 				String course = parcedInput[1];
 
+
+				// ———————————————————————————————
+
+				// before we make a new node we need to search through the tree
+				// if we find a BNum match, just add: node.studentCourses.add(course)
+				// if we do not find that Bnum, we know we need to make a new node
+
+				// —————————————————————————————————————
+
+
+
 				// now that we have the BNumber and the course, create a Node 
 				Node node_orig = new Node(bNum, course);
 				
@@ -97,15 +106,18 @@ public class TreeBuilder {
 				// make the first clone
 				// if this is the first iteration of the loop, then we need to 
 				// create a new TreeBuilder object, because we are starting a 
-				// new tree with a new root and everything
+				// new backup tree with a new root and everything
 				// so I want to 
 				// call the clone1() function, passing in the bNumber, course, and the iteration	
-				clone1(node_orig, bNum, course, iteration);
-				clone2(node_orig, bNum, course, iteration);
+				Node backup_Node_1 = clone1(node_orig, bNum, course, iteration);
+				Node backup_Node_2 = clone2(node_orig, bNum, course, iteration);
 
-				// on iteration 1 within the clone1 function, I will make a new object
-				
-								
+				System.out.println(" =================================== ");
+				System.out.println("backup_Node_1's bNumber is " + backup_Node_1.getBNumber());	
+				System.out.println("Cloned1's courses are ");
+				for(String cstring : backup_Node_1.getCourses()) {
+					System.out.println(cstring);
+				}					
 
 				line = processFile.readFileLine();
 				iteration += 1;
