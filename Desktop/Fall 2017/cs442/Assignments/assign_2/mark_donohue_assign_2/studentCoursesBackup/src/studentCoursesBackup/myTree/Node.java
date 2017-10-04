@@ -6,7 +6,7 @@ public class Node implements Cloneable {
 
 	private int bNumber;
 	private ArrayList<String> studentCourses;
-	private Node left, right;
+	public Node left, right;
 
 	public Node() {
 		bNumber = -1;

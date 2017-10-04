@@ -17,11 +17,13 @@ public class TreeBuilder {
 			node = new Node(bNumber, course);
 		} else {
 			if(bNumber <= node.getBNumber()) {
-				Node leftNode = node.getLeft();
-				leftNode = insert(node.getLeft(), bNumber, course);
-			} else {
-				Node rightNode = node.getRight();
-				rightNode = insert(node.getRight(), bNumber, course);
+				System.out.println();
+				System.out.println("INSERT incoming bNum: " + bNumber + " is less than previous bNumber of " + node.getBNumber());
+				node.left = insert(node.getLeft(), bNumber, course);
+			} else {	
+				System.out.println();
+				System.out.println("INSERT incoming bNum: " + bNumber + " is greater than previous bNumber of " + node.getBNumber());
+				node.right = insert(node.getRight(), bNumber, course);
 			}
 		}
 		return node;
@@ -112,7 +114,7 @@ public class TreeBuilder {
 				// search for bNum
 				Node foundNode = search(root, bNum);
 				if(foundNode == null) {
-					System.out.println("did not find node in tree, creating new node");
+					System.out.println("Iteration " + iteration + " did not find BNum: " + bNum + " Inserting " + bNum + ":" + course);
 					// if here we know that the node does not exist yet 
 					// and therefore needs to be created and inserted	
 					Node node_orig = new Node(bNum, course);
@@ -123,16 +125,26 @@ public class TreeBuilder {
 					// now need to insert the backup_Nodes into their respective trees
 
 				} else {
+					System.out.println("Iteration " + iteration + " Found BNum: " + foundNode.getBNumber() + " adding " + course + " to course list");
 					// if here we know that the Node already exists and so all 
 					// we have to do is add the course to the studentCourses list
 					foundNode.getCourses().add(course);
 				}
 
 				// —————————————————————————————————————			
+				if(iteration > 0 && foundNode != null) {
+					System.out.print("Iteration " + iteration + " BNum: " + foundNode.getBNumber() + "'s courses are: " );
+					for(String string : foundNode.getCourses()) {
+						System.out.print(string + " ");
+					}
+					System.out.println();
+				}
 
 				line = processFile.readFileLine();
 				iteration += 1;
 			}
+			System.out.println();
+			System.out.println("value of root's bnum is " + root.getLeft().getBNumber());
 		}
 	}
 	
