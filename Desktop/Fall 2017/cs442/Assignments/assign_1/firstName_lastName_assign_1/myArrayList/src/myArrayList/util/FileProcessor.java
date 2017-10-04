@@ -24,7 +24,7 @@ public class FileProcessor
 			reader = new BufferedReader(new FileReader(this.inputFile));
 		}
 		catch (FileNotFoundException e) {
-			System.out.println("inside of the catch");
+			System.err.println("Error opening file " + e.getMessage());
 			return false;
 		}
 		return true;	
