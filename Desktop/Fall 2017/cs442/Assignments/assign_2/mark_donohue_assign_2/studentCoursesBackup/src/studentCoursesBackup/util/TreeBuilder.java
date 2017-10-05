@@ -148,6 +148,63 @@ public class TreeBuilder {
 			}
 		}
 	}
+
+	public void readDeleteFile(String deleteFile) {
+		System.out.println();
+		System.out.println("—— Deleting nodes now ——");
+		// create FileProcessor object to begin reading from file
+		FileProcessor processFile = new FileProcessor(deleteFile);
+		boolean openedSuccessfully = false;
+		try {
+			openedSuccessfully = processFile.openFile();
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("inside theFileNotFoundException");
+		}
+		if(openedSuccessfully) {
+			String line = processFile.readFileLine();
+			int iteration = 0;
+			while(line != null) {
+				// parse the input
+				String[] parcedInput = parseInput(line);
+
+				// convert bNumber from String to int
+				int bNum = Integer.parseInt(parcedInput[0]);
+				String course = parcedInput[1];
+
+				// ———————————————————————————————
+
+				// before we make a new node we need to search through the tree
+				// if we find a Bnum match, just add: node.studentCourses.add(course)
+				// if we do not find that Bnum, we know we need to make a new node
+
+				// search for bNum
+				Node foundNode = search(root, bNum);
+				if(foundNode == null) {
+					// if we're in here it's because the bNum doesn't exist in our 
+					// tree, so we don't have to do anything
+					continue;
+				} else {
+					// if we're in here we know that we found the node so we just
+					// delete the course from the list
+					foundNode.getCourses().remove(course);
+					// ********************** CALL OBSERVERS HERE to DELETE *************
+				}
+
+				// —————————————————————————————————————			
+				if(iteration >= 0 && foundNode != null) {
+					System.out.print("Iteration " + iteration + " BNum: " + foundNode.getBNumber() + "'s courses are: " );
+					for(String string : foundNode.getCourses()) {
+						System.out.print(string + " ");
+					}
+					System.out.println();
+				}
+
+				line = processFile.readFileLine();
+				iteration += 1;
+			}
+		}
+	}
 	
 	// USED THIS SITE: http://pages.cs.wisc.edu/~hasti/cs302/examples/Parsing/parseString.html
 	private String[] parseInput(String line) {

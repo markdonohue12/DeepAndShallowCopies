@@ -10,6 +10,7 @@ public class Driver {
 			// calling readFileForNodes on tree - sending in the input file name
 			TreeBuilder originalTree = new TreeBuilder();
 			originalTree.readFileForNodes(args[0]);
+			originalTree.readDeleteFile(args[1]);
 		}
 	}
 }
