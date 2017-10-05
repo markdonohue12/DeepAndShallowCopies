@@ -7,6 +7,8 @@ import java.util.Arrays;
 public class TreeBuilder {
 
 	private Node root;
+	public static TreeBuilder clone1Tree = null;
+	public static TreeBuilder clone2Tree = null;
 
 	public TreeBuilder() {
 		root = null;
@@ -17,12 +19,8 @@ public class TreeBuilder {
 			node = new Node(bNumber, course);
 		} else {
 			if(bNumber <= node.getBNumber()) {
-				System.out.println();
-				System.out.println("INSERT incoming bNum: " + bNumber + " is less than previous bNumber of " + node.getBNumber());
 				node.left = insert(node.getLeft(), bNumber, course);
 			} else {	
-				System.out.println();
-				System.out.println("INSERT incoming bNum: " + bNumber + " is greater than previous bNumber of " + node.getBNumber());
 				node.right = insert(node.getRight(), bNumber, course);
 			}
 		}
@@ -36,10 +34,11 @@ public class TreeBuilder {
 	public Node clone1(Node node_orig, int bNumber, String course, int iteration) {
 		Node clonedNode1 = null;
 		if(iteration == 0) {
-			TreeBuilder clone1Tree = new TreeBuilder();
+			clone1Tree = new TreeBuilder();
 		}
 		try {
 			clonedNode1 = (Node) node_orig.clone();
+			clone1Tree.insert(bNumber, course);
 		} catch (CloneNotSupportedException e) {													System.err.println("Error cloning clonedNode1 " + e.getMessage());
 		} 
 		return clonedNode1;
@@ -48,10 +47,11 @@ public class TreeBuilder {
 	public Node clone2(Node node_orig, int bNumber, String course, int iteration) {
 		Node clonedNode2 = null;
 		if(iteration == 0) {
-			TreeBuilder clone2Tree = new TreeBuilder();
+			clone2Tree = new TreeBuilder();
 		}
 		try {
 			clonedNode2 = (Node) node_orig.clone();
+			clone2Tree.insert(bNumber, course);
 		} catch (CloneNotSupportedException e) {													System.err.println("Error cloning clonedNode2 " + e.getMessage());
 		} 
 		return clonedNode2;
@@ -104,7 +104,6 @@ public class TreeBuilder {
 				int bNum = Integer.parseInt(parcedInput[0]);
 				String course = parcedInput[1];
 
-
 				// ———————————————————————————————
 
 				// before we make a new node we need to search through the tree
@@ -114,18 +113,22 @@ public class TreeBuilder {
 				// search for bNum
 				Node foundNode = search(root, bNum);
 				if(foundNode == null) {
-					System.out.println("Iteration " + iteration + " did not find BNum: " + bNum + " Inserting " + bNum + ":" + course);
+					// System.out.println("Iteration " + iteration + " 
+					// did not find BNum: "                   
+					// + bNum + " Inserting " + bNum + ":" + course);
 					// if here we know that the node does not exist yet 
 					// and therefore needs to be created and inserted	
+
 					Node node_orig = new Node(bNum, course);
-					insert(bNum, course);
+					this.insert(bNum, course);
+					// clone original node, insert them into their respective trees
+					// Note: insert called within cloneN(…) methods
 					Node backup_Node_1 = clone1(node_orig, bNum, course, iteration);
 					Node backup_Node_2 = clone2(node_orig, bNum, course, iteration);
 					
 					// now need to insert the backup_Nodes into their respective trees
 
 				} else {
-					System.out.println("Iteration " + iteration + " Found BNum: " + foundNode.getBNumber() + " adding " + course + " to course list");
 					// if here we know that the Node already exists and so all 
 					// we have to do is add the course to the studentCourses list
 					foundNode.getCourses().add(course);
@@ -143,8 +146,6 @@ public class TreeBuilder {
 				line = processFile.readFileLine();
 				iteration += 1;
 			}
-			System.out.println();
-			System.out.println("value of root's bnum is " + root.getLeft().getBNumber());
 		}
 	}
 	
