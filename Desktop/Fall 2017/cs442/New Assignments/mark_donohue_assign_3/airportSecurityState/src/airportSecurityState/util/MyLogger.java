@@ -1,5 +1,4 @@
-
-package airportSecurityState.util;
+package airportSecurityState.driver;
 
 public class MyLogger{
 
@@ -10,21 +9,25 @@ public class MyLogger{
     // DEBUG_VALUE=0 [No output should be printed from the application to stdout. It is ok to write to the output file though" ]
     
 
-    public static enum DebugLevel { RELEASE, FROM_RESULTS, IN_RESULTS, IN_RUN, CONSTRUCTOR };
+    public static enum DebugLevel { NONE, STATE, CONSTRUCTOR };
 
     private static DebugLevel debugLevel;
 
     public static void setDebugValue (int levelIn) {
 		switch (levelIn) {
-	  		case 4: debugLevel = DebugLevel.CONSTRUCTOR; 
+	  		case 2: debugLevel = DebugLevel.CONSTRUCTOR; 
+					break;
+			case 1: debugLevel = DebugLevel.STATE;
 					break;
 	      	// FIXME: add code for other cases
-	  		case 0: debugLevel = DebugLevel.RELEASE; 
+	  		case 0: debugLevel = DebugLevel.NONE; 
+					System.out.println("setting debugLevel to DebugLevel.NONE");
 					break;
 		}
     }
 
     public static void setDebugValue (DebugLevel levelIn) {
+		System.out.println("ENTERED THE DEBUG LEVEL LEVELIN METHOD");
 		debugLevel = levelIn;
     }
 
@@ -41,4 +44,8 @@ public class MyLogger{
     public String toString() {
 		return "Debug Level is " + debugLevel;
     }
+	
+	public DebugLevel getLevel() {
+		return debugLevel;
+	}
 }

@@ -12,6 +12,10 @@ public class Driver {
 			System.exit(0);
 		} else {
 			loggerLevel = Integer.parseInt(args[2]);
+			MyLogger myLogger = new MyLogger();
+			myLogger.setDebugValue(loggerLevel);
+			System.out.println(myLogger.toString());
+			myLogger.writeMessage("testing myLogger", MyLogger.DebugLevel.CONSTRUCTOR);
 		}
 	}
 }
