@@ -10,12 +10,17 @@ public class Driver {
 		if(args.length != 3) {
 			System.err.println("Need exactly 3 arguments: input file name, output file 				name, Logger input number. Program exiting");
 			System.exit(0);
+		} else if (Integer.parseInt(args[2]) < 0 || Integer.parseInt(args[2]) > 4) {
+			System.err.println("Logger Level must be in range 0 - 4, exiting");
+			System.exit(0);
 		} else {
+			// set the LoggerLevel for the program
 			loggerLevel = Integer.parseInt(args[2]);
 			MyLogger myLogger = new MyLogger();
 			myLogger.setDebugValue(loggerLevel);
-			System.out.println(myLogger.toString());
-			myLogger.writeMessage("testing myLogger", MyLogger.DebugLevel.CONSTRUCTOR);
+
+			// create the AirportSecurityState instance
+			AirportSecurityState airSecure = new AirportSecurityState();
 		}
 	}
 }
