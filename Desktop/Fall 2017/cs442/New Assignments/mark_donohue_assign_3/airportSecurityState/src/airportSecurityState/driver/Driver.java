@@ -20,7 +20,12 @@ public class Driver {
 			myLogger.setDebugValue(loggerLevel);
 
 			// create the AirportSecurityState instance
-			AirportSecurityState airSecure = new AirportSecurityState();
+			AirportSecurityState airSecure = new AirportSecurityState(myLogger);
+
+			// create DataCruncher instance
+			DataCruncher dataCrunch = new DataCruncher(args[0], myLogger);
+			dataCrunch.readFromFile();
+			
 		}
 	}
 }

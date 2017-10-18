@@ -10,13 +10,18 @@ public class FileProcessor
 	private String inputFile;
 	private BufferedReader reader;	
 
+	// MyLogger instance
+	MyLogger myLogger;
+
 	public FileProcessor() {
 		inputFile = "input.txt";
 		reader = null;
 	}
 
-	public FileProcessor(String inFile) {
+	public FileProcessor(String inFile, MyLogger myLog) {
 		inputFile = inFile;
+		myLogger = myLog;
+		myLogger.writeMessage("Logger: called FileProcessor constructor", 					MyLogger.DebugLevel.CONSTRUCTOR);
 	}
 
 	public boolean openFile() throws FileNotFoundException {
