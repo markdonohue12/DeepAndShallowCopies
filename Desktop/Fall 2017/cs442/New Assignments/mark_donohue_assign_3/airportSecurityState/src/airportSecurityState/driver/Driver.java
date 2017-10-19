@@ -23,7 +23,7 @@ public class Driver {
 			AirportSecurityState airSecure = new AirportSecurityState(myLogger);
 
 			// create DataCruncher instance
-			DataCruncher dataCrunch = new DataCruncher(args[0], myLogger);
+			DataCruncher dataCrunch = new DataCruncher(args[0], myLogger, airSecure);
 			dataCrunch.readFromFile();
 			
 		}

@@ -2,15 +2,15 @@ package airportSecurityState.driver;
 
 public class AirportSecurityState {
 	// private state members
-	AirportStateInterface lowRiskState;
-	AirportStateInterface modRiskState;
-	AirportStateInterface highRiskState;
+	private AirportStateI lowRiskState;
+	private AirportStateI modRiskState;
+	private AirportStateI highRiskState;
 	
 	// logger member
-	MyLogger myLogger;
+	private MyLogger myLogger;
 
 	// instance to keep track of program State
-	AirportStateInterface state;
+	private AirportStateI state;
 
 	public AirportSecurityState(MyLogger myLog) {
 		// initialize the states
@@ -25,5 +25,25 @@ public class AirportSecurityState {
 		state = lowRiskState;
 
 		myLog.writeMessage("Logger: called the AirportSecurityState constructor", 				MyLogger.DebugLevel.CONSTRUCTOR);
+	}
+
+	public AirportStateI getCurrentState() {
+		return state;
+	}
+
+	public void tightenOrLoosenSecurity(int day, String item) {
+		//System.out.println("made it to tightenOrLoosenSecurity() inside of AirportSecurityState");
+		
+		// get the current state
+		// call the current state's tighten or loosen function, sending in day and Item
+		System.out.println("calling the getCurrentStateFunction()");
+		AirportStateI curState = this.getCurrentState();
+		if(curState instanceof LowRiskState) {
+			System.out.println("Current state is LowRisk");
+		} else if (curState instanceof ModRiskState) {
+			System.out.println("Current state is ModRisk"); 
+		} else {
+			System.out.println("Current state is HighRisk");
+		}
 	}
 }

@@ -1,16 +1,7 @@
 package airportSecurityState.driver;
 
-public class LowRiskState implements AirportStateInterface {
-	public void escalate() {
-		System.out.println("this is the escalate function");
+public class LowRiskState implements AirportStateI {
+	public void tightenOrLoosenSecurity(int day, String item) {
+		System.out.println("this is tightenOrLoosenSecurity for LowRiskState");
 	}
-
-	public void de_escalate() {
-		System.out.println("this is the de-escalate function");
-	}
-
-	public void determine_escalation() {
-		System.out.println("this is the determint_escalation function");
-	}
-	
 }
