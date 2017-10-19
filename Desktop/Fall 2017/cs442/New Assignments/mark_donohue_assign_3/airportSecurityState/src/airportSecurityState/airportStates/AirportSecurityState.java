@@ -31,19 +31,9 @@ public class AirportSecurityState {
 		return state;
 	}
 
-	public void tightenOrLoosenSecurity(int day, String item) {
-		//System.out.println("made it to tightenOrLoosenSecurity() inside of AirportSecurityState");
-		
+	public void tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher) {
 		// get the current state
 		// call the current state's tighten or loosen function, sending in day and Item
-		System.out.println("calling the getCurrentStateFunction()");
-		AirportStateI curState = this.getCurrentState();
-		if(curState instanceof LowRiskState) {
-			System.out.println("Current state is LowRisk");
-		} else if (curState instanceof ModRiskState) {
-			System.out.println("Current state is ModRisk"); 
-		} else {
-			System.out.println("Current state is HighRisk");
-		}
+		state.tightenOrLoosenSecurity(day, item, dataCruncher);
 	}
 }

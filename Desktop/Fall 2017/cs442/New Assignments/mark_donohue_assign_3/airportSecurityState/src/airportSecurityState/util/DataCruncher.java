@@ -49,12 +49,29 @@ public class DataCruncher {
 
 				// at this point I have the day and the item
 				// DO SOMETHING WITH THE PARCED INPUT
-				contextState.tightenOrLoosenSecurity(day, item);
+				contextState.tightenOrLoosenSecurity(day, item, this);
 
 				line = processFile.readFileLine();
 				iteration += 1;
 			}
 		}
+	}
+
+	public int calculateProhibitedItemsPerDay(int day, String item) {
+		// have an integer ArrayList as a private data member of DataCruncher to 
+		// 		hold all of the currently seen days
+		// also have String ArrayList of the prohibited items
+
+		// 1)
+		// look through the integer ArrayList
+		// if day is not in there, increment unique days counter
+		// .add new day to the ArrayList
+		
+		// 2) 
+		// if item is in the prohibited items list, increment num_of_prohib_items
+
+		// 3) 
+		// calculate avgProhibitedItemsPerDay by doing prohib_items / unique_days
 	}
 
 	// USED THIS SITE: http://pages.cs.wisc.edu/~hasti/cs302/examples/Parsing/parseString.html

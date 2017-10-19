@@ -1,5 +1,5 @@
 package airportSecurityState.driver;
 
 public interface AirportStateI {
-	public void tightenOrLoosenSecurity(int day, String item);
+	public void tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher);
 }
