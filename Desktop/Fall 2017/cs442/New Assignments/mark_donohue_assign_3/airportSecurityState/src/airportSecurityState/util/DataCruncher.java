@@ -3,6 +3,8 @@ package airportSecurityState.driver;
 import java.io.FileNotFoundException;
 import java.lang.Integer;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class DataCruncher {
 
@@ -15,8 +17,10 @@ public class DataCruncher {
 	private int numOfProhibitedItems;
 	private int numOfUniqueDays;
 	private int numOfTravellers;
+	private Results results;
+	private String outFile;
 
-	public DataCruncher(String inputFile, MyLogger myLog, AirportSecurityState inContextState) {
+	public DataCruncher(String inputFile, MyLogger myLog, AirportSecurityState inContextState, Results inResults, String inOutFile) {
 		inFile = inputFile;
 		contextState = inContextState;
 		myLogger = myLog;
@@ -25,6 +29,8 @@ public class DataCruncher {
 		uniqueDays = new ArrayList<Integer>();
 		prohibitedItems = new String[4];
 		numOfTravellers = 0;
+		results = inResults;
+		outFile = inOutFile;
 		prohibitedItems[0] = "Gun";
 		prohibitedItems[1] = "NailCutter";
 		prohibitedItems[2] = "Blade";
@@ -35,6 +41,7 @@ public class DataCruncher {
 
 	public void readFromFile() {
 		FileProcessor processFile = new FileProcessor(inFile, myLogger);
+		BufferedWriter outWriter = processFile.openOutFile(outFile);
 		boolean openedSuccessfully = false;
 		try {
 			openedSuccessfully = processFile.openFile();
@@ -67,11 +74,16 @@ public class DataCruncher {
 
 				// at this point I have the day and the item
 				// DO SOMETHING WITH THE PARCED INPUT
-				contextState.tightenOrLoosenSecurity(day, item, this);
+				contextState.tightenOrLoosenSecurity(day, item, this, results, outFile, outWriter);
 
 				line = processFile.readFileLine();
 				iteration += 1;
 			}
+		try {
+			outWriter.close();
+		} catch (IOException e) {
+			System.err.println("Caught IOException while closing output file");
+		}
 		}
 	}
 

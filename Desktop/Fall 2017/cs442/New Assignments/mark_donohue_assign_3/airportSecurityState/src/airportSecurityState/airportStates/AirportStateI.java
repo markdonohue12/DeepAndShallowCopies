@@ -4,4 +4,5 @@ public interface AirportStateI {
 	public String tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher);
 
 	public void writeToStdOut();
+	public String getID();
 }

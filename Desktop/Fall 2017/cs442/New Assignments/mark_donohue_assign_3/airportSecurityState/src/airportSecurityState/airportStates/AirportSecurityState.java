@@ -1,5 +1,7 @@
 package airportSecurityState.driver;
 
+import java.io.BufferedWriter;
+
 public class AirportSecurityState {
 	// private state members
 	private AirportStateI lowRiskState;
@@ -31,7 +33,7 @@ public class AirportSecurityState {
 		return state;
 	}
 
-	public void tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher) {
+	public void tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher, Results results, String outFile, BufferedWriter outWriter) {
 		// get the current state
 		// call the current state's tighten or loosen function, sending in day and Item
 		String newState = state.tightenOrLoosenSecurity(day, item, dataCruncher);
@@ -47,5 +49,6 @@ public class AirportSecurityState {
 		
 		// now take correct action based on new state
 		state.writeToStdOut();
+		results.writeToFile(outFile, state.getID(), outWriter);
 	}
 }

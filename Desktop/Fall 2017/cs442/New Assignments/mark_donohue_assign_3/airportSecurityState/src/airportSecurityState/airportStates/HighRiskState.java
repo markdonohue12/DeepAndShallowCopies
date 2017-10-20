@@ -45,5 +45,9 @@ public class HighRiskState implements AirportStateI {
 	public void writeToStdOut() {
 		System.out.println(highID);
 	}
+
+	public String getID() {
+		return highID;
+	}
 		
 }

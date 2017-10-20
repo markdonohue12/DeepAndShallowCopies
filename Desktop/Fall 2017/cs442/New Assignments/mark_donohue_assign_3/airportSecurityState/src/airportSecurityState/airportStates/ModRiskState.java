@@ -44,5 +44,9 @@ public class ModRiskState implements AirportStateI {
 	public void writeToStdOut() {
 		System.out.println(modID);
 	}
+
+	public String getID() {
+		return modID;
+	}
 	
 }

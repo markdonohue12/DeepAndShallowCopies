@@ -46,4 +46,8 @@ public class LowRiskState implements AirportStateI {
 	public void writeToStdOut() {
 		System.out.println(lowID);
 	}
+
+	public String getID() {
+		return lowID;
+	}
 }

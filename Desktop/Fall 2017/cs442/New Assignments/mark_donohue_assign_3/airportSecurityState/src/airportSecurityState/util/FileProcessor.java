@@ -4,11 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class FileProcessor
 {
 	private String inputFile;
-	private BufferedReader reader;	
+	private BufferedReader reader;
+	public BufferedWriter outWriter;	
 
 	// MyLogger instance
 	MyLogger myLogger;
@@ -47,5 +50,16 @@ public class FileProcessor
 
 	public String getInFileName() {
 		return inputFile;
+	}
+
+	public BufferedWriter openOutFile(String outFile) {
+		outWriter = null;
+		try {
+			FileWriter fstream = new FileWriter(outFile);
+			outWriter = new BufferedWriter(fstream);
+		} catch (IOException e) {
+   			 System.err.println("Error: " + e.getMessage());
+		}
+		return outWriter;
 	}
 }

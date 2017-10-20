@@ -22,10 +22,12 @@ public class Driver {
 			// create the AirportSecurityState instance
 			AirportSecurityState airSecure = new AirportSecurityState(myLogger);
 
+			// create Results instance
+			Results results = new Results();
+
 			// create DataCruncher instance
-			DataCruncher dataCrunch = new DataCruncher(args[0], myLogger, airSecure);
+			DataCruncher dataCrunch = new DataCruncher(args[0], myLogger, airSecure, results, args[1]);
 			dataCrunch.readFromFile();
-			
 		}
 	}
 }
