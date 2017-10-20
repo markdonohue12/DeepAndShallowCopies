@@ -6,6 +6,13 @@ import java.io.BufferedWriter;
 public class Results implements FileDisplayInterface {
 
 	private Formatter outF;
+	private MyLogger myLogger;
+
+	public Results(MyLogger inMyLogger) {
+		myLogger = inMyLogger;
+
+		myLogger.writeMessage("Logger: called the Results constructor", 				MyLogger.DebugLevel.CONSTRUCTOR);
+	}
 
 	public void writeToFile(String outFile, String result, BufferedWriter outWriter) {
 		try {

@@ -4,6 +4,14 @@ public class HighRiskState implements AirportStateI {
 
 	private String highID = "2 4 6 8 10";
 
+	private MyLogger myLogger;
+
+	public HighRiskState(MyLogger inMyLogger) {
+		myLogger = inMyLogger;
+
+		myLogger.writeMessage("Logger: called the HighRiskState constructor", 					MyLogger.DebugLevel.CONSTRUCTOR);
+	}
+
 	public String tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher) {
 		//System.out.println("inside of the HIGH risk state Class");
 

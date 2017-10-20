@@ -9,17 +9,21 @@ public class MyLogger{
     // DEBUG_VALUE=0 [No output should be printed from the application to stdout. It is ok to write to the output file though" ]
     
 
-    public static enum DebugLevel { NONE, STATE, CONSTRUCTOR };
+    public static enum DebugLevel { NONE, STATE, CONSTRUCTOR, TRAFFIC, PROHIBITED };
 
     private static DebugLevel debugLevel;
 
     public static void setDebugValue (int levelIn) {
 		switch (levelIn) {
-	  		case 2: debugLevel = DebugLevel.CONSTRUCTOR; 
+	  		case 4: debugLevel = DebugLevel.CONSTRUCTOR; 
 					break;
-			case 1: debugLevel = DebugLevel.STATE;
+			case 3: debugLevel = DebugLevel.STATE;
+					break;
+			case 2: debugLevel = DebugLevel.TRAFFIC;
 					break;
 	      	// FIXME: add code for other cases
+			case 1: debugLevel = DebugLevel.PROHIBITED;
+					break;
 	  		case 0: debugLevel = DebugLevel.NONE; 
 					System.out.println("setting debugLevel to DebugLevel.NONE");
 					break;

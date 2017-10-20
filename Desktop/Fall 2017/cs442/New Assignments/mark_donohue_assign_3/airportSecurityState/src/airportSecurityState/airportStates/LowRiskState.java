@@ -3,6 +3,13 @@ package airportSecurityState.driver;
 public class LowRiskState implements AirportStateI {
 
 	private String lowID = "1 3 5 7 9";
+	private MyLogger myLogger;
+
+	public LowRiskState(MyLogger inMyLogger) {
+		myLogger = inMyLogger;
+
+		myLogger.writeMessage("Logger: called the LowRiskState constructor", 					MyLogger.DebugLevel.CONSTRUCTOR);
+	}
 
 	public String tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher) {
 		//System.out.println("inside of the LOW risk state Class");

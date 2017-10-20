@@ -103,10 +103,12 @@ public class DataCruncher {
 	}
 
 	public int calcAvgTrafficPerDay(int travellers, int uniqueDays) {
+		myLogger.writeMessage("Logger: calculated Avg Traffic Per Day is " + (travellers/uniqueDays), MyLogger.DebugLevel.TRAFFIC);
 		return travellers/uniqueDays;
 	}
 
 	public int calcAvgProhibitedItemsPerDay(int items, int uniqueDays) {
+		myLogger.writeMessage("Logger: calculated Avg Prohibited Items Per Day is " + (items/uniqueDays), MyLogger.DebugLevel.PROHIBITED);
 		return items/uniqueDays;
 	}
 

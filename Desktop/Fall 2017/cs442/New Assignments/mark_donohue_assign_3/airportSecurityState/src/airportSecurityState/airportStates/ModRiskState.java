@@ -4,6 +4,14 @@ public class ModRiskState implements AirportStateI {
 
 	private String modID = "2 3 5 8 9";
 
+	private MyLogger myLogger;
+
+	public ModRiskState(MyLogger inMyLogger) {
+		myLogger = inMyLogger;
+
+		myLogger.writeMessage("Logger: called the ModRiskState constructor", 					MyLogger.DebugLevel.CONSTRUCTOR);
+	}
+
 	public String tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher) {
 		//System.out.println("inside of the MOD risk state Class");
 

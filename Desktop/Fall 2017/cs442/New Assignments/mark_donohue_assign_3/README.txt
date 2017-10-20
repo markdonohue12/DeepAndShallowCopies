@@ -11,7 +11,7 @@ ant -buildfile src/build.xml all
 -----------------------------------------------------------------------
 ## To run by specifying arguments from command line 
 ## We will use this to run your code
-ant -buildfile src/build.xml run -Darg0=FIRST -Darg1=SECOND
+ant -buildfile src/build.xml run -Darg0=FIRST -Darg1=SECOND -Darg2=THIRD
 
 ———————————————————————————————————
 
@@ -29,7 +29,7 @@ grade of 0 for the involved assignment for my first offense and that I
 will receive a grade of F for the course for any additional
 offense.”
 
-[Date: Oct. 4, 2017]
+[Date: Oct. 19, 2017]
 Mark Donohue
 
 -----------------------------------------------------------------------
@@ -37,12 +37,18 @@ Mark Donohue
 Provide justification for Data Structures used in this assignment in
 term of Big O complexity (time and/or space)
 
+Did not use a lot of data structures here. 
+Within DataCruncher I used an ArrayList to hold the ints representing the different days at the airport. I looked to see if items were contained in this list which is a constant time operation.
+
+Within DataCruncher I also used a String array to hold the prohibited items, I linearly search through this array so it is O(n)
 
 
 -----------------------------------------------------------------------
 
 Provide list of citations (urls, etc.) from where you have taken code
 (if any).
+
+USED THIS SITE: http://pages.cs.wisc.edu/~hasti/cs302/examples/Parsing/parseString.html
 
 
 

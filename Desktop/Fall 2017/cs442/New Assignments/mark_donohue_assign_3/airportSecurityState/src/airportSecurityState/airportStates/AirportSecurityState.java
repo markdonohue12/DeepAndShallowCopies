@@ -16,9 +16,9 @@ public class AirportSecurityState {
 
 	public AirportSecurityState(MyLogger myLog) {
 		// initialize the states
-		lowRiskState = new LowRiskState();
-		modRiskState = new ModRiskState();
-		highRiskState = new HighRiskState();
+		lowRiskState = new LowRiskState(myLog);
+		modRiskState = new ModRiskState(myLog);
+		highRiskState = new HighRiskState(myLog);
 	
 		// initialize the logger
 		myLogger = myLog;
@@ -46,6 +46,8 @@ public class AirportSecurityState {
 		} else if(newState.equals("high")) {
 			state = highRiskState;
 		}
+
+		myLogger.writeMessage("Logger: state has changed", 				MyLogger.DebugLevel.STATE);
 		
 		// now take correct action based on new state
 		state.writeToStdOut();
