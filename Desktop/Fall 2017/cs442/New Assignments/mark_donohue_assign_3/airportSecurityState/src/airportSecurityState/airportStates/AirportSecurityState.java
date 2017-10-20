@@ -34,6 +34,18 @@ public class AirportSecurityState {
 	public void tightenOrLoosenSecurity(int day, String item, DataCruncher dataCruncher) {
 		// get the current state
 		// call the current state's tighten or loosen function, sending in day and Item
-		state.tightenOrLoosenSecurity(day, item, dataCruncher);
+		String newState = state.tightenOrLoosenSecurity(day, item, dataCruncher);
+		
+		// set the new state based on the newState return value
+		if(newState.equals("low")) {
+			state = lowRiskState;
+		} else if(newState.equals("mod")) {
+			state = modRiskState;
+		} else if(newState.equals("high")) {
+			state = highRiskState;
+		}
+		
+		// now take correct action based on new state
+		state.writeToStdOut();
 	}
 }

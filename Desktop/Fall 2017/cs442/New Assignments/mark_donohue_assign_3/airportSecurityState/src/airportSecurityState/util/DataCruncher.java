@@ -83,25 +83,11 @@ public class DataCruncher {
 	}
 
 	public void calculateProhibitedItemsPerDay(String item) {
-		// have an integer ArrayList as a private data member of DataCruncher to 
-		// 		hold all of the currently seen days
-		// also have String ArrayList of the prohibited items
-
-		// 1)
-		// look through the integer ArrayList
-		// if day is not in there, increment unique days counter
-		// .add new day to the ArrayList
-		
-		// 2) 
-		// if item is in the prohibited items list, increment num_of_prohib_items
 		for(int i = 0; i < 4; i++) {
 			if(item.equals(prohibitedItems[i])) {
 				numOfProhibitedItems += 1;
 			}
 		}
-
-		// 3) 
-		// calculate avgProhibitedItemsPerDay by doing prohib_items / unique_days
 	}
 
 	public int calcAvgTrafficPerDay(int travellers, int uniqueDays) {
